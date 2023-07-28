@@ -30,6 +30,7 @@
     "twilio": "^4.10.0"
   },
   "devDependencies": {
+    "@twilio-labs/serverless-runtime-types": "^2.2.3",
     "standard": "^17.1.0"
   },
   "eslintConfig": {
