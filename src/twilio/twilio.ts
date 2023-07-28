@@ -1,20 +1,18 @@
-import twilio from 'twilio'
+import twilio, { Twilio } from 'twilio'
 
-import { TwilioClient } from '@twilio-labs/serverless-runtime-types/types'
-import { Client } from 'twilio/lib/base/BaseTwilio'
 import { CreateClient } from '../types'
 
 import { ClientTwilioError } from '../errors'
 import { schemaAuth } from '../schemas'
 import { validateVariables } from '../utils'
 
-let client: Client | TwilioClient | null
+let client: Twilio | null
 
 /**
  * This function createClient creates a Twilio client instance either using the provided accountSid and
  * authToken or by retrieving an existing client from the context object. It returns the Twilio client
  * instance that can be used to interact with Twilio APIs.
- * 
+ *
  * @example
  * const client = createClient({
  *  accountSid: 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
@@ -25,7 +23,7 @@ let client: Client | TwilioClient | null
  * @example
  * const client = createClient({ context: { getTwilioClient: serverlessTwilio }})
  */
-export function createClient({ context, accountSid, authToken, options }: CreateClient): Client | TwilioClient {
+export function createClient({ context, accountSid, authToken, options }: CreateClient): Twilio | null {
   if (accountSid == null || authToken == null) {
     if (context?.getTwilioClient == null) {
       throw new ClientTwilioError('❌ ~ The context.getTwilioClient() object was not found.', {
@@ -33,7 +31,7 @@ export function createClient({ context, accountSid, authToken, options }: Create
 { accountSid: "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", authToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" }`,
       })
     }
-    client = context.getTwilioClient()
+    client = context.getTwilioClient(options)
     return client
   }
 
