@@ -1,6 +1,6 @@
 import twilio, { Twilio } from 'twilio'
 
-import { CreateClient } from '../types'
+import { CreateClientOptions } from '../types'
 
 import { ClientTwilioError } from '../errors'
 import { schemaAuth } from '../schemas'
@@ -23,7 +23,7 @@ let client: Twilio | null
  * @example
  * const client = createClient({ context: { getTwilioClient: serverlessTwilio }})
  */
-export function createClient({ context, accountSid, authToken, options }: CreateClient): Twilio | null {
+export function createClient({ context, accountSid, authToken, options }: CreateClientOptions): Twilio | null {
   if (accountSid == null || authToken == null) {
     if (context?.getTwilioClient == null) {
       throw new ClientTwilioError('❌ ~ The context.getTwilioClient() object was not found.', {

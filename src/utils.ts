@@ -11,13 +11,13 @@ import { client } from './twilio/twilio'
  * Validates the Twilio client and ensures that it is initialized.
  * Throws a ClientTwilioError if the client is not found or not initialized.
  */
-export function validateClientTwilio () {
+export function validateClientTwilio() {
   if (client == null) {
     throw new ClientTwilioError('❌ ~ Twilio client not found', {
       details: `The Twilio client is not initialized. Please provide the accountSid and authToken to initialize the client as follows:
 createClient({ accountSid: "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", authToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" })
 or
-createClient({ context })`
+createClient({ context })`,
     })
   }
 }
@@ -61,10 +61,7 @@ export function validateVariables(schema: Schema, data: unknown, functionName = 
  *  .page({ address })
  *  .then((page) => accumulateWithPaginator(page))
  */
-export function accumulateWithPaginator(
-  paginator: Paginator,
-  accumulator: object[] = []
-): object[] | Promise<object[]> {
+export function accumulateWithPaginator(paginator: Paginator, accumulator: object[] = []): any {
   const items = paginator?.instances
 
   if (items === null) return []
@@ -74,7 +71,7 @@ export function accumulateWithPaginator(
   if (!paginator.getNextPageUrl) return accumulator
 
   return paginator.getNextPageUrl()
-    ? paginator.nextPage().then((page) => accumulateWithPaginator(page, accumulator))
+    ? paginator.nextPage()?.then((page) => accumulateWithPaginator(page, accumulator))
     : accumulator
 }
 
