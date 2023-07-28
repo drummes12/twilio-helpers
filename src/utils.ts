@@ -3,8 +3,24 @@ import { Schema, isSchema } from 'joi'
 
 import { CompleteErrorDetails, HeadersResponse, Paginator, SimpleErrorDetails } from './types'
 
-import { ValidationError } from './errors'
+import { ClientTwilioError, ValidationError } from './errors'
 import { schemaResponse } from './schemas'
+import { client } from './twilio/twilio'
+
+/**
+ * Validates the Twilio client and ensures that it is initialized.
+ * Throws a ClientTwilioError if the client is not found or not initialized.
+ */
+export function validateClientTwilio () {
+  if (client == null) {
+    throw new ClientTwilioError('❌ ~ Twilio client not found', {
+      details: `The Twilio client is not initialized. Please provide the accountSid and authToken to initialize the client as follows:
+createClient({ accountSid: "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", authToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" })
+or
+createClient({ context })`
+    })
+  }
+}
 
 /**
  * This function checks if any of the variables in an array are undefined, and throws an error with a message
