@@ -1,0 +1,38 @@
+{
+  "name": "twilio-helpers",
+  "version": "0.0.1",
+  "description": "Enhance and simplify Twilio Node library with TypeScript.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drummes12/twilio-helpers"
+  },
+  "keywords": [
+    "twilio",
+    "twilio-node"
+  ],
+  "author": "Esteban González <drummes.12@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/drummes12/twilio-helpers/issues"
+  },
+  "homepage": "https://github.com/drummes12/twilio-helpers#readme",
+  "engines": {
+    "node": ">=16.0"
+  },
+  "dependencies": {
+    "joi": "17.9.2"
+  },
+  "peerDependencies": {
+    "twilio": "^4.10.0"
+  },
+  "devDependencies": {
+    "standard": "^17.1.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  }
+}
