@@ -1,3 +1,6 @@
+import { Context } from '@twilio-labs/serverless-runtime-types/types'
+import { ClientOpts } from 'twilio'
+
 export type SimpleErrorDetails = {
   status?: number
   details?: string
@@ -17,5 +20,12 @@ export interface Paginator {
 }
 
 export interface HeadersResponse {
-  [key: string]: string;
+  [key: string]: string
+}
+
+export type CreateClient = {
+  context?: Context
+  accountSid: string
+  authToken: string
+  options?: ClientOpts
 }
