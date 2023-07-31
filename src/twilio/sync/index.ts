@@ -17,7 +17,7 @@ export function initializerSyncService (serviceSid: string) {
   validateClientTwilio()
   validateVariables(schemaSyncServiceSid, serviceSid, 'initializerSyncService')
 
-  syncService = ((client?.sync.v1.services(serviceSid)) != null) || null
+  syncService = client?.sync.v1.services(serviceSid) ?? null
   return syncService
 }
 

@@ -29,7 +29,8 @@ export async function createMessageInConversation (
     .messages()
     .create({ author, body })
     .catch((error) => {
-      throw new TwilioError(`❌ ~ createMessageInConversation ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ createMessageInConversation ~ ${message}`, { ...error })
     })
 }
 
@@ -63,6 +64,7 @@ export async function createMessageContentInConversation (
       contentVariables: JSON.stringify(content.variables)
     })
     .catch((error) => {
-      throw new TwilioError(`❌ ~ createMessageContentInConversation ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ createMessageContentInConversation ~ ${message}`, { ...error })
     })
 }

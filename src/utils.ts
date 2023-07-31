@@ -68,9 +68,7 @@ export function accumulateWithPaginator (paginator: Paginator, accumulator: obje
 
   accumulator.push(...items)
 
-  if (!paginator.getNextPageUrl) return accumulator
-
-  return paginator.getNextPageUrl()
+  return (paginator?.getNextPageUrl() != null)
     ? paginator.nextPage()?.then((page) => accumulateWithPaginator(page, accumulator))
     : accumulator
 }
@@ -91,12 +89,12 @@ export function accumulateWithPaginator (paginator: Paginator, accumulator: obje
  * }
  * callback(null, createResponse(200, { success:true }, headers))
  */
-export function createResponse (statusCode: number, body = {}, headers: HeadersResponse) {
+export function createResponse (statusCode: number, body = {}, headers?: HeadersResponse) {
   validateVariables(schemaResponse, { statusCode, body }, 'createResponse')
 
   const response = new Twilio.Response()
 
-  if (!headers) {
+  if (headers == null) {
     response.appendHeader('Access-Control-Allow-Origin', '*')
     response.appendHeader('Access-Control-Allow-Methods', 'OPTIONS, POST, GET')
     response.appendHeader('Access-Control-Allow-Headers', 'Content-Type')

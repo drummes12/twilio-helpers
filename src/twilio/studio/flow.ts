@@ -1,3 +1,4 @@
+import { FlowInstance } from 'twilio/lib/rest/studio/v1/flow'
 import { TwilioError } from '../../errors'
 import { schemaStudioFlowSid } from '../../schemas'
 import { accumulateWithPaginator, validateClientTwilio, validateVariables } from '../../utils'
@@ -11,13 +12,14 @@ import { client } from '../twilio'
  */
 export async function getAllStudioFlows () {
   validateClientTwilio()
-  const studiosFlowsList = await client?.studio.v2.flows
+  const studiosFlowsList: FlowInstance[] | [] = await client?.studio.v2.flows
     .page()
     .then((page) => accumulateWithPaginator(page, []))
     .catch((error) => {
-      throw new TwilioError(`❌ ~ getStudioFlows ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ getStudioFlows ~ ${message}`, { ...error })
     })
-  if (!studiosFlowsList) {
+  if (studiosFlowsList.length === 0) {
     throw new TwilioError('❌ ~ getAllStudioFlows ~ Studio Flows not found.', {
       status: 404,
       code: 'STUDIO_FLOWS_NOT_FOUND',
@@ -43,6 +45,7 @@ export async function getStudioFlow (studioFlowSid: string) {
     .get(studioFlowSid)
     .fetch()
     .catch((error) => {
-      throw new TwilioError(`❌ ~ getStudioFlow ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ getStudioFlow ~ ${message}`, { ...error })
     })
 }

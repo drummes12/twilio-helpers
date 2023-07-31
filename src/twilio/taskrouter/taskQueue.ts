@@ -5,6 +5,28 @@ import { TwilioError } from '../../errors'
 import { schemaOptionsCreateTaskQueue, schemaWorkspace } from '../../schemas'
 import { validateVariables } from '../../utils'
 
+/**
+ * Creates a new Task Queue in a Twilio TaskRouter workspace.
+ *
+ * @example
+ * // Assuming 'workspace' are already defined:
+ *
+ * const options = {
+ *  friendlyName: string;
+    targetWorkers?: string;
+    maxReservedWorkers?: number;
+    taskOrder?: TaskQueueTaskOrder;
+    reservationActivitySid?: string;
+    assignmentActivitySid?: string;
+ * }
+ *
+ * try {
+ *   const newTaskQueue = await createTaskQueue(workspace, options);
+ *   console.log('New Task Queue created:', newTaskQueue);
+ * } catch (error) {
+ *   console.error('Error creating Task Queue:', error.message);
+ * }
+ */
 export async function createTaskQueue (workspace: WorkspaceContext, options: TaskQueueListInstanceCreateOptions) {
   validateVariables(schemaWorkspace, workspace, 'createTaskQueue')
   validateVariables(schemaOptionsCreateTaskQueue, options, 'createTaskQueue')

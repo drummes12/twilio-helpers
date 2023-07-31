@@ -13,13 +13,14 @@ import { client } from '../twilio'
  */
 export async function getContents (): Promise<ContentInstance[]> {
   validateClientTwilio()
-  const contentsList = await client?.content.v1.contents
+  const contentsList: ContentInstance[] | [] = await client?.content.v1.contents
     .page()
     .then((page) => accumulateWithPaginator(page, []))
     .catch((error) => {
-      throw new TwilioError(`❌ ~ getContents ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ getContents ~ ${message}`, { ...error })
     })
-  if (!contentsList) {
+  if (contentsList.length === 0) {
     throw new TwilioError('❌ ~ getContents ~ Contents not found.', {
       status: 404,
       code: 'CONTENTS_NOT_FOUND',
@@ -43,7 +44,8 @@ export async function getContentsBySid (contentSid: string) {
     .get(contentSid)
     .fetch()
     .catch((error) => {
-      throw new TwilioError(`❌ ~ getContentsBySid ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ getContentsBySid ~ ${message}`, { ...error })
     })
 }
 

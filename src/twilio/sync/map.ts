@@ -22,7 +22,8 @@ export async function ensureSyncMapExists (MapName: string) {
     if (error.code === 20404) {
       return await syncService?.syncMaps.create({ uniqueName: MapName })
     }
-    throw new TwilioError(`❌ ~ ensureSyncMapExists ~ ${error.message}`, { ...error })
+    const message: string = error.message
+    throw new TwilioError(`❌ ~ ensureSyncMapExists ~ ${message}`, { ...error })
   }
 }
 
@@ -39,14 +40,15 @@ export async function ensureSyncMapExists (MapName: string) {
  * })
  */
 export async function createSyncMapItem (syncMap: SyncMapInstance, { key, data, itemTtl }: CreateSyncMapItemOptions) {
-  validateVariables(schemaSyncService, syncService, 'createSyncMapItem')
+  validateVariables(schemaSyncService, syncService, 'createItemMapSync')
   validateVariables(schemaCreateSyncMapItem, { syncMap, options: { key, data, itemTtl } }, 'createItemMapSync')
 
   return await syncMap
     .syncMapItems()
     .create({ key, data, itemTtl })
     .catch((error) => {
-      throw new TwilioError(`❌ ~ createSyncMapItem ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ createSyncMapItem ~ ${message}`, { ...error })
     })
 }
 
@@ -67,7 +69,8 @@ export async function fetchSyncMapItem (syncMap: SyncMapInstance, key: string) {
     .get(key)
     .fetch()
     .catch((error) => {
-      throw new TwilioError(`❌ ~ fetchSyncMapItem ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ fetchSyncMapItem ~ ${message}`, { ...error })
     })
 }
 
@@ -89,6 +92,7 @@ export async function removeItemMapSync (syncMap: SyncMapInstance, key: string) 
     .remove()
     .catch((error) => {
       if (error.code === 20404) return true
-      throw new TwilioError(`❌ ~ removeItemMapSync ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ removeItemMapSync ~ ${message}`, { ...error })
     })
 }

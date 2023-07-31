@@ -19,7 +19,8 @@ export async function getExecutionsStudioFlow (studioFlow: FlowInstance) {
     .page()
     .then((page) => accumulateWithPaginator(page, []))
     .catch((error) => {
-      throw new TwilioError(`❌ ~ getExecutionsStudioFlow ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ getExecutionsStudioFlow ~ ${message}`, { ...error })
     })
 }
 
@@ -47,6 +48,7 @@ export async function createExecutionStudioFlow (studioFlow: FlowInstance, { to,
     .executions()
     .create({ to, from, parameters })
     .catch((error) => {
-      throw new TwilioError(`❌ ~ createExecutionStudioFlow ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ createExecutionStudioFlow ~ ${message}`, { ...error })
     })
 }

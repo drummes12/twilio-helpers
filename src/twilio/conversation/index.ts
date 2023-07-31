@@ -12,7 +12,8 @@ import { client } from '../twilio'
 export async function createConversation () {
   validateClientTwilio()
   return await client?.conversations.v1.conversations.create().catch((error) => {
-    throw new TwilioError(`❌ ~ createConversation ~ ${error.message}`, { ...error })
+    const message: string = error.message
+    throw new TwilioError(`❌ ~ createConversation ~ ${message}`, { ...error })
   })
 }
 
@@ -31,7 +32,8 @@ export async function fetchConversation (conversationSid: string) {
     .conversations(conversationSid)
     .fetch()
     .catch((error) => {
-      throw new TwilioError(`❌ ~ fetchConversation ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ fetchConversation ~ ${message}`, { ...error })
     })
 }
 

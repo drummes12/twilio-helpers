@@ -36,7 +36,8 @@ export async function addParticipantInConversation (
     .participants()
     .create(participantData)
     .catch((error) => {
-      throw new TwilioError(`❌ ~ addParticipantInConversation ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ addParticipantInConversation ~ ${message}`, { ...error })
     })
 }
 /**
@@ -71,7 +72,8 @@ export async function removeParticipantInConversation (
     if (participantToEliminated == null) return false
     return await participantToEliminated.remove()
   } catch (error: any) {
-    throw new TwilioError(`❌ ~ removeParticipantInConversation ~ ${error.message}`, { ...error })
+    const message: string = error.message
+    throw new TwilioError(`❌ ~ removeParticipantInConversation ~ ${message}`, { ...error })
   }
 }
 
@@ -89,7 +91,8 @@ export async function checkAgentInConversation (conversation: ConversationInstan
     .list()
     .then((participants) => participants.some((participant) => participant?.identity != null))
     .catch((error) => {
-      throw new TwilioError(`❌ ~ checkAgentInConversation ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ checkAgentInConversation ~ ${message}`, { ...error })
     })
 }
 
@@ -108,7 +111,8 @@ export function getConversationsByParticipantAddress (
     .page({ address })
     .then((page) => accumulateWithPaginator(page, []))
     .catch((error) => {
-      throw new TwilioError(`❌ ~ getConversationsByParticipantAddress ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ getConversationsByParticipantAddress ~ ${message}`, { ...error })
     })
 }
 

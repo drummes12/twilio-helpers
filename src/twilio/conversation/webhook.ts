@@ -44,7 +44,8 @@ export async function addWebhookInConversation (
     .webhooks()
     .create(configurationWebhook)
     .catch((error) => {
-      throw new TwilioError(`❌ ~ addWebhookInConversation ~ ${error.message}`, { ...error })
+      const message: string = error.message
+      throw new TwilioError(`❌ ~ addWebhookInConversation ~ ${message}`, { ...error })
     })
 }
 
@@ -62,6 +63,7 @@ export async function findWebhooksTargetInConversation (conversation: Conversati
     const webhooksList = await conversation.webhooks().list()
     return webhooksList.filter((webhook) => webhook.target === target)
   } catch (error: any) {
-    throw new TwilioError(`❌ ~ findWebhooksTargetInConversation ~ ${error.message}`, { ...error })
+    const message: string = error.message
+    throw new TwilioError(`❌ ~ findWebhooksTargetInConversation ~ ${message}`, { ...error })
   }
 }
