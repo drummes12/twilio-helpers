@@ -10,6 +10,8 @@ export const schemaConversationSid = schemaSid(SID.conversation.initial).label(S
 export const schemaContentSid = schemaSid(SID.content.initial).label(SID.content.label)
 export const schemaStudioFlowSid = schemaSid(SID.studioFlow.initial).label(SID.studioFlow.label)
 export const schemaSyncServiceSid = schemaSid(SID.syncService.initial).label(SID.syncService.label)
+export const schemaWorkspaceSid = schemaSid(SID.workspace.initial).label(SID.workspace.label)
+export const schemaTaskSid = schemaSid(SID.task.initial).label(SID.task.label)
 export const schemaSyncMapSid = schemaSid(SID.syncMap.initial).label(SID.syncMap.label)
 
 /** SCHEMAS BASE */
@@ -45,6 +47,15 @@ export const schemaStudioFlow = Joi.object({
 export const schemaSyncService = Joi.object({
   _solution: Joi.object({
     sid: schemaSyncServiceSid.required()
+  }).required()
+})
+  .min(2)
+  .unknown(true)
+  .required()
+
+export const schemaWorkspace = Joi.object({
+  _solution: Joi.object({
+    sid: schemaWorkspaceSid.required()
   }).required()
 })
   .min(2)
@@ -128,4 +139,13 @@ export const schemaCreateSyncMapItem = Joi.object({
 export const schemaSyncMapItem = Joi.object({
   syncMap: schemaSyncMap.required(),
   key: Joi.string().max(320).required()
+}).required()
+
+export const schemaOptionsCreateTaskQueue = Joi.object({
+  friendlyName: Joi.string().required(),
+  targetWorkers: Joi.string(),
+  maxReservedWorkers: Joi.number().integer().min(1).max(50),
+  taskOrder: Joi.string().valid('FIFO', 'LIFO'),
+  reservationActivitySid: Joi.string(),
+  assignmentActivitySid: Joi.string()
 }).required()

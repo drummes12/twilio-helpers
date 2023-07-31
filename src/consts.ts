@@ -5,6 +5,8 @@ export const SID = {
   content: { initial: 'HX', label: 'Content SID' },
   studioFlow: { initial: 'FW', label: 'Studio Flow SID' },
   syncService: { initial: 'IS', label: 'Service Sync SID' },
+  workspace: { initial: 'WS', label: 'Workspace SID' },
+  task: { initial: 'WT', label: 'Task SID' },
   syncMap: { initial: 'MP', label: 'Map Sync SID' }
 }
 
