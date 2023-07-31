@@ -41,6 +41,12 @@ export interface CreateExecutionStudioFlowOptions {
   parameters?: object
 }
 
+export interface CreateSyncMapItemOptions {
+  key: string
+  data: object
+  itemTtl?: number
+}
+
 export interface SimpleErrorDetails {
   status?: number
   details?: string
