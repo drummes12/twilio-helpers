@@ -1,11 +1,16 @@
-import { Context } from '@twilio-labs/serverless-runtime-types/types'
-import { ClientOpts } from 'twilio'
+import { Twilio, ClientOpts } from 'twilio'
 import Page, { TwilioResponsePayload } from 'twilio/lib/base/Page'
 import Version from 'twilio/lib/base/Version'
 import { WebhookMethod, WebhookTarget } from 'twilio/lib/rest/conversations/v1/conversation/webhook'
 
 export interface CreateClientOptions {
-  context?: Context
+  context?: {
+    getTwilioClient?: (options?: ClientOpts) => Twilio
+    DOMAIN_NAME: string
+    PATH: string
+    SERVICE_SID: string | undefined
+    ENVIRONMENT_SID: string | undefined
+  }
   accountSid: string
   authToken: string
   options?: ClientOpts
