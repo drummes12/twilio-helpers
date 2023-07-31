@@ -1,8 +1,8 @@
-import { ServiceContext } from "twilio/lib/rest/sync/v1/service"
+import { ServiceContext } from 'twilio/lib/rest/sync/v1/service'
 
-import { client } from "../twilio"
-import { validateClientTwilio, validateVariables } from "../../utils"
-import { schemaSyncServiceSid } from "../../schemas"
+import { client } from '../twilio'
+import { validateClientTwilio, validateVariables } from '../../utils'
+import { schemaSyncServiceSid } from '../../schemas'
 
 let syncService: ServiceContext | null = null
 
@@ -13,11 +13,11 @@ let syncService: ServiceContext | null = null
  * @example
  * const syncService = await initializerSyncService('ISxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
  */
-export function initializerSyncService(serviceSid: string) {
+export function initializerSyncService (serviceSid: string) {
   validateClientTwilio()
   validateVariables(schemaSyncServiceSid, serviceSid, 'initializerSyncService')
 
-  syncService = client?.sync.v1.services(serviceSid) || null
+  syncService = ((client?.sync.v1.services(serviceSid)) != null) || null
   return syncService
 }
 

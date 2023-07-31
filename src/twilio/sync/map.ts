@@ -1,10 +1,9 @@
-import { SyncMapInstance } from "twilio/lib/rest/sync/v1/service/syncMap"
-import { syncService } from "."
-import { TwilioError } from "../../errors"
-import { schemaCreateSyncMapItem, schemaString, schemaSyncMapItem, schemaSyncService } from "../../schemas"
-import { validateVariables } from "../../utils"
-import { CreateSyncMapItemOptions } from "../../types"
-
+import { SyncMapInstance } from 'twilio/lib/rest/sync/v1/service/syncMap'
+import { syncService } from '.'
+import { TwilioError } from '../../errors'
+import { schemaCreateSyncMapItem, schemaString, schemaSyncMapItem, schemaSyncService } from '../../schemas'
+import { validateVariables } from '../../utils'
+import { CreateSyncMapItemOptions } from '../../types'
 
 /**
  * Ensures that a Sync Map with the specified name exists in the specified Sync Service.
@@ -13,7 +12,7 @@ import { CreateSyncMapItemOptions } from "../../types"
  * await initializerSyncService('ISxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
  * const syncMap = await ensureSyncMapExists('sync-map-name')
  */
-export async function ensureSyncMapExists(MapName: string) {
+export async function ensureSyncMapExists (MapName: string) {
   validateVariables(schemaSyncService, syncService, 'ensureSyncMapExists')
   validateVariables(schemaString.required(), MapName, 'ensureSyncMapExists')
 
@@ -39,11 +38,11 @@ export async function ensureSyncMapExists(MapName: string) {
  *  itemTtl: 3600,
  * })
  */
-export function createSyncMapItem(syncMap: SyncMapInstance, { key, data, itemTtl }: CreateSyncMapItemOptions) {
+export async function createSyncMapItem (syncMap: SyncMapInstance, { key, data, itemTtl }: CreateSyncMapItemOptions) {
   validateVariables(schemaSyncService, syncService, 'createSyncMapItem')
   validateVariables(schemaCreateSyncMapItem, { syncMap, options: { key, data, itemTtl } }, 'createItemMapSync')
 
-  return syncMap
+  return await syncMap
     .syncMapItems()
     .create({ key, data, itemTtl })
     .catch((error) => {
@@ -59,11 +58,11 @@ export function createSyncMapItem(syncMap: SyncMapInstance, { key, data, itemTtl
  * const syncMap = await ensureSyncMapExists('sync-map-name')
  * const itemSyncMap = await fetchSyncMapItem(syncMap, 'test-item')
  */
-export function fetchSyncMapItem(syncMap: SyncMapInstance, key: string) {
+export async function fetchSyncMapItem (syncMap: SyncMapInstance, key: string) {
   validateVariables(schemaSyncService, syncService, 'fetchSyncMapItem')
   validateVariables(schemaSyncMapItem, { syncMap, key }, 'fetchSyncMapItem')
 
-  return syncMap
+  return await syncMap
     .syncMapItems()
     .get(key)
     .fetch()
@@ -80,11 +79,11 @@ export function fetchSyncMapItem(syncMap: SyncMapInstance, key: string) {
  * const syncMap = await ensureSyncMapExists('sync-map-name')
  * const wasRemovedItemSyncMap = await removeItemMapSync(syncMap, 'test-item')
  */
-export function removeItemMapSync(syncMap: SyncMapInstance, key: string) {
+export async function removeItemMapSync (syncMap: SyncMapInstance, key: string) {
   validateVariables(schemaSyncService, syncService, 'removeItemMapSync')
   validateVariables(schemaSyncMapItem, { syncMap, key }, 'removeItemMapSync')
 
-  return syncMap
+  return await syncMap
     .syncMapItems()
     .get(key)
     .remove()
