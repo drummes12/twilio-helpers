@@ -11,13 +11,13 @@ import { client } from './twilio/twilio'
  * Validates the Twilio client and ensures that it is initialized.
  * Throws a ClientTwilioError if the client is not found or not initialized.
  */
-export function validateClientTwilio() {
+export function validateClientTwilio () {
   if (client == null) {
     throw new ClientTwilioError('❌ ~ Twilio client not found', {
       details: `The Twilio client is not initialized. Please provide the accountSid and authToken to initialize the client as follows:
 createClient({ accountSid: "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", authToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" })
 or
-createClient({ context })`,
+createClient({ context })`
     })
   }
 }
@@ -33,17 +33,17 @@ createClient({ context })`,
  *  console.error(e.message)
  * }
  */
-export function validateVariables(schema: Schema, data: unknown, functionName = '') {
+export function validateVariables (schema: Schema, data: unknown, functionName = '') {
   if (!isSchema(schema)) {
     throw new ValidationError(`❌ ~ ${functionName} ~ Required schema not provided`, {
-      details: 'First parameter must be a schema',
+      details: 'First parameter must be a schema'
     })
   }
   const result = schema.validate(data)
   const { error } = result
-  if (error) {
+  if (error != null) {
     throw new ValidationError(`❌ ~ ${functionName} ~ Required parameter not provided`, {
-      details: error.message,
+      details: error.message
     })
   }
 }
@@ -61,7 +61,7 @@ export function validateVariables(schema: Schema, data: unknown, functionName = 
  *  .page({ address })
  *  .then((page) => accumulateWithPaginator(page))
  */
-export function accumulateWithPaginator(paginator: Paginator, accumulator: object[] = []): any {
+export function accumulateWithPaginator (paginator: Paginator, accumulator: object[] = []): any {
   const items = paginator?.instances
 
   if (items === null) return []
@@ -91,7 +91,7 @@ export function accumulateWithPaginator(paginator: Paginator, accumulator: objec
  * }
  * callback(null, createResponse(200, { success:true }, headers))
  */
-export function createResponse(statusCode: number, body = {}, headers: HeadersResponse) {
+export function createResponse (statusCode: number, body = {}, headers: HeadersResponse) {
   validateVariables(schemaResponse, { statusCode, body }, 'createResponse')
 
   const response = new Twilio.Response()
@@ -123,7 +123,7 @@ export function createResponse(statusCode: number, body = {}, headers: HeadersRe
  *  callback(null, createResponse(codeStatus, body))
  * }
  */
-export function responseCatchError(error: CompleteErrorDetails | SimpleErrorDetails = {}) {
+export function responseCatchError (error: CompleteErrorDetails | SimpleErrorDetails = {}) {
   const { status = 400 } = error
   const success = false
 

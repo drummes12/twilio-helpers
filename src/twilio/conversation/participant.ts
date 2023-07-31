@@ -21,7 +21,7 @@ import { ParticipantConversationInstance } from 'twilio/lib/rest/conversations/v
  *  identity: 'johndoe',
  * })
  */
-export function addParticipantInConversation(
+export async function addParticipantInConversation (
   conversation: ConversationInstance,
   { address, proxyAddress, identity, attributes }: CreateParticipantOptions
 ) {
@@ -30,9 +30,9 @@ export function addParticipantInConversation(
     'messagingBinding.address': address,
     'messagingBinding.proxyAddress': proxyAddress,
     identity,
-    attributes,
+    attributes
   }
-  return conversation
+  return await conversation
     .participants()
     .create(participantData)
     .catch((error) => {
@@ -53,7 +53,7 @@ export function addParticipantInConversation(
  *  identity: 'johndoe',
  * })
  */
-export async function removeParticipantInConversation(
+export async function removeParticipantInConversation (
   conversation: ConversationInstance,
   { address, proxyAddress, identity }: ParticipantOptions
 ) {
@@ -69,7 +69,7 @@ export async function removeParticipantInConversation(
           participant.identity === identity)
     )
     if (participantToEliminated == null) return false
-    return participantToEliminated.remove()
+    return await participantToEliminated.remove()
   } catch (error: any) {
     throw new TwilioError(`❌ ~ removeParticipantInConversation ~ ${error.message}`, { ...error })
   }
@@ -82,9 +82,9 @@ export async function removeParticipantInConversation(
  * @example
  * const hasAgentAssigned = await checkAgentInConversation(conversation)
  */
-export function checkAgentInConversation(conversation: ConversationInstance) {
+export async function checkAgentInConversation (conversation: ConversationInstance) {
   validateVariables(schemaConversation.required(), conversation, 'checkAgentInConversation')
-  return conversation
+  return await conversation
     .participants()
     .list()
     .then((participants) => participants.some((participant) => participant?.identity != null))
@@ -99,7 +99,7 @@ export function checkAgentInConversation(conversation: ConversationInstance) {
  * @example
  * const conversations = await getConversationsByParticipantAddress('whatsapp:+1234567890')
  */
-export function getConversationsByParticipantAddress(
+export function getConversationsByParticipantAddress (
   address: string
 ): Promise<ParticipantConversationInstance[]> | undefined {
   validateClientTwilio()
@@ -121,9 +121,9 @@ export function getConversationsByParticipantAddress(
  *  proxyAddress: 'whatsapp:+1234567890'
  * })
  */
-export async function getConversationActiveByAddressParticipant({
+export async function getConversationActiveByAddressParticipant ({
   address,
-  proxyAddress,
+  proxyAddress
 }: {
   address: string
   proxyAddress: string
@@ -135,5 +135,5 @@ export async function getConversationActiveByAddressParticipant({
       conversation.conversationState === 'active' &&
       conversation.participantMessagingBinding.proxy_address === proxyAddress
   )
-  return conversation || null
+  return (conversation != null) || null
 }

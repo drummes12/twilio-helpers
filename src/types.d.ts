@@ -4,14 +4,14 @@ import Page, { TwilioResponsePayload } from 'twilio/lib/base/Page'
 import Version from 'twilio/lib/base/Version'
 import { WebhookMethod, WebhookTarget } from 'twilio/lib/rest/conversations/v1/conversation/webhook'
 
-export type CreateClientOptions = {
+export interface CreateClientOptions {
   context?: Context
   accountSid: string
   authToken: string
   options?: ClientOpts
 }
 
-export type Content = {
+export interface Content {
   sid: string
   variables: { [key: number]: string }
 }
@@ -35,12 +35,18 @@ export interface CreateWebhookOptions {
   flowSid?: string
 }
 
-export type SimpleErrorDetails = {
+export interface CreateExecutionStudioFlowOptions {
+  to: string
+  from: string
+  parameters?: object
+}
+
+export interface SimpleErrorDetails {
   status?: number
   details?: string
 }
 
-export type CompleteErrorDetails = {
+export interface CompleteErrorDetails {
   status: number
   code: string
   moreInfo: string

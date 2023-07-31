@@ -23,7 +23,7 @@ import { WebhookTarget } from 'twilio/lib/rest/conversations/v1/conversation/web
  *  url: 'https://example.com'
  * })
  */
-export function addWebhookInConversation(
+export async function addWebhookInConversation (
   conversation: ConversationInstance,
   { method = 'POST', filters, triggers, url, target, flowSid }: CreateWebhookOptions
 ) {
@@ -38,9 +38,9 @@ export function addWebhookInConversation(
     'configuration.triggers': triggers,
     'configuration.flowSid': flowSid,
     'configuration.url': url,
-    target,
+    target
   }
-  return conversation
+  return await conversation
     .webhooks()
     .create(configurationWebhook)
     .catch((error) => {
@@ -56,7 +56,7 @@ export function addWebhookInConversation(
  *  target: 'studio'
  * })
  */
-export async function findWebhooksTargetInConversation(conversation: ConversationInstance, target: WebhookTarget) {
+export async function findWebhooksTargetInConversation (conversation: ConversationInstance, target: WebhookTarget) {
   validateVariables(schemaFindWebhookTargetConversation, { conversation, target }, 'findWebhookTargetInConversation')
   try {
     const webhooksList = await conversation.webhooks().list()

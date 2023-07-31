@@ -1,8 +1,8 @@
-import { ContentInstance } from "twilio/lib/rest/content/v1/content"
-import { TwilioError } from "../../errors"
-import { schemaContentSid, schemaString } from "../../schemas"
-import { accumulateWithPaginator, validateClientTwilio, validateVariables } from "../../utils"
-import { client } from "../twilio"
+import { ContentInstance } from 'twilio/lib/rest/content/v1/content'
+import { TwilioError } from '../../errors'
+import { schemaContentSid, schemaString } from '../../schemas'
+import { accumulateWithPaginator, validateClientTwilio, validateVariables } from '../../utils'
+import { client } from '../twilio'
 
 /**
  * This function retrieves a list of contents from the Twilio API and throws an error if no contents
@@ -11,7 +11,7 @@ import { client } from "../twilio"
  * @example
  * const allContents = await getContents()
  */
-export async function getContents(): Promise<ContentInstance[]> {
+export async function getContents (): Promise<ContentInstance[]> {
   validateClientTwilio()
   const contentsList = await client?.content.v1.contents
     .page()
@@ -37,9 +37,9 @@ export async function getContents(): Promise<ContentInstance[]> {
  * @example
  * const content = await getContentsBySid('HXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
  */
-export function getContentsBySid(contentSid: string) {
+export async function getContentsBySid (contentSid: string) {
   validateVariables(schemaContentSid.required(), contentSid, 'getContentsBySid')
-  return client?.content.v1.contents
+  return await client?.content.v1.contents
     .get(contentSid)
     .fetch()
     .catch((error) => {
@@ -53,7 +53,7 @@ export function getContentsBySid(contentSid: string) {
  * @example
  * const content = await getContentByName('template-name')
  */
-export async function getContentByName(contentName: string) {
+export async function getContentByName (contentName: string) {
   validateVariables(schemaString.required(), contentName, 'getContentByName')
   const contentsList = await getContents()
   return contentsList.find((content) => content.friendlyName === contentName)

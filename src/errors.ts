@@ -4,7 +4,7 @@ export class ClientTwilioError extends Error {
   public status: number
   public details: string
 
-  constructor(message: string, { status = 401, details = '' }: SimpleErrorDetails) {
+  constructor (message: string, { status = 401, details = '' }: SimpleErrorDetails) {
     super(message)
     this.name = 'ClientTwilioError'
     this.status = status
@@ -18,7 +18,7 @@ export class TwilioError extends Error {
   public more_info: string
   public details: string
 
-  constructor(message: string, { status, code, moreInfo, details }: CompleteErrorDetails) {
+  constructor (message: string, { status, code, moreInfo, details }: CompleteErrorDetails) {
     super(message)
     this.name = 'TwilioError'
     this.status = status
@@ -32,7 +32,7 @@ export class ValidationError extends Error {
   public status: number
   public details: string
 
-  constructor(message: string, { status = 428, details = '' }: SimpleErrorDetails) {
+  constructor (message: string, { status = 428, details = '' }: SimpleErrorDetails) {
     super(message)
     this.name = 'ValidationError'
     this.status = status
@@ -46,7 +46,7 @@ export class HelperError extends Error {
   public more_info: string
   public details: string
 
-  constructor(message: string, { status, code, moreInfo, details }: CompleteErrorDetails) {
+  constructor (message: string, { status, code, moreInfo, details }: CompleteErrorDetails) {
     super(message)
     this.name = 'HelperError'
     this.status = status

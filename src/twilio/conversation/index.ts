@@ -9,9 +9,9 @@ import { client } from '../twilio'
  * @example
  * const conversation = await createConversation()
  */
-export function createConversation() {
+export async function createConversation () {
   validateClientTwilio()
-  return client?.conversations.v1.conversations.create().catch((error) => {
+  return await client?.conversations.v1.conversations.create().catch((error) => {
     throw new TwilioError(`❌ ~ createConversation ~ ${error.message}`, { ...error })
   })
 }
@@ -23,11 +23,11 @@ export function createConversation() {
  * @example
  * const conversation = await fetchConversation('CHxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
  */
-export function fetchConversation(conversationSid: string) {
+export async function fetchConversation (conversationSid: string) {
   validateClientTwilio()
   validateVariables(schemaConversationSid.required(), conversationSid, 'fetchConversation')
 
-  return client?.conversations.v1
+  return await client?.conversations.v1
     .conversations(conversationSid)
     .fetch()
     .catch((error) => {

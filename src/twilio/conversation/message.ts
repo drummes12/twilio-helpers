@@ -16,7 +16,7 @@ import { Content } from '../../types'
  * }
  * const message = await createMessageInConversation(conversation, options)
  */
-export function createMessageInConversation(
+export async function createMessageInConversation (
   conversation: ConversationInstance,
   { author, body }: MessageListInstanceCreateOptions
 ) {
@@ -25,7 +25,7 @@ export function createMessageInConversation(
     { conversation, options: { author, body } },
     'createMessageInConversation'
   )
-  return conversation
+  return await conversation
     .messages()
     .create({ author, body })
     .catch((error) => {
@@ -46,21 +46,21 @@ export function createMessageInConversation(
  * }
  * const message = await createMessageContentInConversation(conversation, options)
  */
-export function createMessageContentInConversation(
+export async function createMessageContentInConversation (
   conversation: ConversationInstance,
-  { author, content }: { author: string; content: Content }
+  { author, content }: { author: string, content: Content }
 ) {
   validateVariables(
     schemaMessageContentConversation,
     { conversation, options: { author, content } },
     'createMessageContentInConversation'
   )
-  return conversation
+  return await conversation
     .messages()
     .create({
       author,
       contentSid: content.sid,
-      contentVariables: JSON.stringify(content.variables),
+      contentVariables: JSON.stringify(content.variables)
     })
     .catch((error) => {
       throw new TwilioError(`❌ ~ createMessageContentInConversation ~ ${error.message}`, { ...error })

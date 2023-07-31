@@ -5,7 +5,7 @@ export const SID = {
   content: { initial: 'HX', label: 'Content SID' },
   studioFlow: { initial: 'FW', label: 'Studio Flow SID' },
   syncService: { initial: 'IS', label: 'Service Sync SID' },
-  syncMap: { initial: 'MP', label: 'Map Sync SID' },
+  syncMap: { initial: 'MP', label: 'Map Sync SID' }
 }
 
 export const REGEX_SID = (initialSid: string) => new RegExp(`^${initialSid}[\\S]{32}$`)
@@ -23,7 +23,7 @@ export const WEBHOOK_PRE_ACTION = [
   'onParticipantAdd',
   'onParticipantRemove',
   'onParticipantUpdate',
-  'onUserUpdate',
+  'onUserUpdate'
 ]
 export const WEBHOOK_POST_ACTION = [
   'onMessageAdded',
@@ -38,5 +38,5 @@ export const WEBHOOK_POST_ACTION = [
   'onConversationStateUpdated',
   'onDeliveryUpdated',
   'onUserAdded',
-  'onUserUpdated',
+  'onUserUpdated'
 ]
