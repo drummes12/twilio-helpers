@@ -1,7 +1,7 @@
-import { WorkspaceContext } from 'twilio/lib/rest/taskrouter/v1/workspace'
 import { TwilioError } from '../../errors'
 import { schemaString, schemaWorkerSid, schemaWorkspace } from '../../schemas'
 import { validateVariables } from '../../utils'
+import { workspace } from '.'
 
 /**
  * Fetches a specific worker from a Twilio workerRouter workspace.
@@ -10,18 +10,17 @@ import { validateVariables } from '../../utils'
  * // Assuming 'workspace' are already defined:
  *
  * try {
- *   const worker = await fetchWorker(workspace, 'WKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+ *   const worker = await fetchWorker('WKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
  *   console.log('worker fetched successfully:', worker);
  * } catch (error) {
  *   console.error('Error fetching worker:', error.message);
  * }
  */
-export async function fetchWorker (workspace: WorkspaceContext, workerSid: string) {
+export async function fetchWorker (workerSid: string) {
   validateVariables(schemaWorkspace, workspace, 'fetchWorker')
   validateVariables(schemaWorkerSid, workerSid, 'fetchWorker')
 
-  return await workspace
-    .workers(workerSid)
+  return await workspace?.workers(workerSid)
     .fetch()
     .catch((error) => {
       const message: string = error.message
@@ -45,14 +44,13 @@ export async function fetchWorker (workspace: WorkspaceContext, workerSid: strin
  * }
  */
 export async function findWorkerEvaluatingExpression (
-  workspace: WorkspaceContext,
   targetWorkersExpression: string,
   limit?: number
 ) {
   validateVariables(schemaWorkspace, workspace, 'findWorkerEvaluatingExpression')
   validateVariables(schemaString, targetWorkersExpression, 'findWorkerEvaluatingExpression')
 
-  return await workspace.workers
+  return await workspace?.workers
     .list({
       targetWorkersExpression,
       limit

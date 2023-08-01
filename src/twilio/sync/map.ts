@@ -11,15 +11,20 @@ import { CreateSyncMapItemOptions } from '../../types'
  * @example
  * await initializerSyncService('ISxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
  * const syncMap = await ensureSyncMapExists('sync-map-name')
+ *
+ * @example
+ * await initializerSyncService('ISxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+ * const syncMap = await ensureSyncMapExists('sync-map-name', false)
+ *    .catch((error) => console.error(error))
  */
-export async function ensureSyncMapExists (MapName: string) {
+export async function ensureSyncMapExists (MapName: string, createMap: boolean = true) {
   validateVariables(schemaSyncService, syncService, 'ensureSyncMapExists')
   validateVariables(schemaString.required(), MapName, 'ensureSyncMapExists')
 
   try {
     return await syncService?.syncMaps(MapName).fetch()
   } catch (error: any) {
-    if (error.code === 20404) {
+    if (error.code === 20404 && createMap) {
       return await syncService?.syncMaps.create({ uniqueName: MapName })
     }
     const message: string = error.message
