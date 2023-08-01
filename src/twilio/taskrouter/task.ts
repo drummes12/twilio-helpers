@@ -25,7 +25,7 @@ export async function fetchTask (workspace: WorkspaceContext, taskSid: string) {
     .fetch()
     .catch((error) => {
       const message: string = error.message
-      throw new TwilioError(`❌ ~ createTaskQueue ~ ${message}`, { ...error })
+      throw new TwilioError(`❌ ~ fetchTask ~ ${message}`, { ...error })
     })
 }
 

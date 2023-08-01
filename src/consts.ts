@@ -7,6 +7,7 @@ export const SID = {
   syncService: { initial: 'IS', label: 'Service Sync SID' },
   workspace: { initial: 'WS', label: 'Workspace SID' },
   task: { initial: 'WT', label: 'Task SID' },
+  worker: { initial: 'WK', label: 'Worker SID' },
   syncMap: { initial: 'MP', label: 'Map Sync SID' }
 }
 

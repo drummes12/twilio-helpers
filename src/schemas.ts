@@ -12,6 +12,7 @@ export const schemaStudioFlowSid = schemaSid(SID.studioFlow.initial).label(SID.s
 export const schemaSyncServiceSid = schemaSid(SID.syncService.initial).label(SID.syncService.label)
 export const schemaWorkspaceSid = schemaSid(SID.workspace.initial).label(SID.workspace.label)
 export const schemaTaskSid = schemaSid(SID.task.initial).label(SID.task.label)
+export const schemaWorkerSid = schemaSid(SID.worker.initial).label(SID.worker.label)
 export const schemaSyncMapSid = schemaSid(SID.syncMap.initial).label(SID.syncMap.label)
 
 /** SCHEMAS BASE */

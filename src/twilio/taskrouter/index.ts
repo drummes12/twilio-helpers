@@ -24,4 +24,5 @@ export function initializerWorkspace (workspaceSid: string) {
 export { workspace }
 
 export * as task from './task'
+export * as worker from './worker'
 export * as taskQueue from './taskQueue'
