@@ -22,3 +22,5 @@ export function initializerSyncService (serviceSid: string) {
 }
 
 export { syncService }
+
+export * as map from './map'
