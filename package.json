@@ -1,6 +1,6 @@
 {
   "name": "twilio-helpers",
-  "version": "0.0.15",
+  "version": "0.1.1",
   "description": "Enhance and simplify Twilio Node library with TypeScript.",
   "main": "./lib",
   "types": "./index.d.ts",
