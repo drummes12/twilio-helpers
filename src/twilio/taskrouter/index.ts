@@ -1,7 +1,7 @@
 
 import { client } from '../twilio'
-import { validateClientTwilio, validateVariables } from '../../utils'
-import { schemaWorkspaceSid } from '../../schemas'
+import { validateClientTwilio, validateVariables } from '../../common/utils'
+import { schemaWorkspaceSid } from '../../common/schemas'
 import { WorkspaceContext } from 'twilio/lib/rest/taskrouter/v1/workspace'
 
 let workspace: WorkspaceContext | null = null

@@ -1,11 +1,11 @@
 import '@twilio-labs/serverless-runtime-types'
 import { Schema, isSchema } from 'joi'
 
-import { CompleteErrorDetails, HeadersResponse, Paginator, SimpleErrorDetails } from './types'
+import { CompleteErrorDetails, HeadersResponse, Paginator, SimpleErrorDetails } from '../interfaces'
 
 import { ClientTwilioError, ValidationError } from './errors'
 import { schemaResponse } from './schemas'
-import { client } from './twilio/twilio'
+import { client } from '../twilio/twilio'
 
 /**
  * Validates the Twilio client and ensures that it is initialized.

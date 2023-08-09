@@ -2,8 +2,15 @@
   "name": "twilio-helpers",
   "version": "0.0.15",
   "description": "Enhance and simplify Twilio Node library with TypeScript.",
-  "main": "src/index.js",
+  "main": "./lib",
+  "types": "./index.d.ts",
+  "files": [
+    "lib",
+    "index.js",
+    "index.d.ts"
+  ],
   "scripts": {
+    "test:typescript": "tsc --noEmit",
     "lint": "eslint src/** --ext .ts",
     "lint:fix": "eslint src/** --ext .ts --fix",
     "prepublish": "npm run build",

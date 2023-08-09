@@ -1,9 +1,9 @@
 import { SyncMapInstance } from 'twilio/lib/rest/sync/v1/service/syncMap'
 import { syncService } from '.'
-import { TwilioError } from '../../errors'
-import { schemaCreateSyncMapItem, schemaString, schemaSyncMapItem, schemaSyncService } from '../../schemas'
-import { validateVariables } from '../../utils'
-import { CreateSyncMapItemOptions } from '../../types'
+import { TwilioError } from '../../common/errors'
+import { schemaCreateSyncMapItem, schemaString, schemaSyncMapItem, schemaSyncService } from '../../common/schemas'
+import { validateVariables } from '../../common/utils'
+import { CreateSyncMapItemOptions } from '../../interfaces'
 
 /**
  * Ensures that a Sync Map with the specified name exists in the specified Sync Service.

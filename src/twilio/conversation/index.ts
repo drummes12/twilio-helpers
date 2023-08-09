@@ -1,6 +1,6 @@
-import { TwilioError } from '../../errors'
-import { schemaConversationSid } from '../../schemas'
-import { validateClientTwilio, validateVariables } from '../../utils'
+import { TwilioError } from '../../common/errors'
+import { schemaConversationSid } from '../../common/schemas'
+import { validateClientTwilio, validateVariables } from '../../common/utils'
 import { client } from '../twilio'
 
 /**

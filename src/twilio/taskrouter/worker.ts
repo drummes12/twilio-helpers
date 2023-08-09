@@ -1,6 +1,6 @@
-import { TwilioError } from '../../errors'
-import { schemaString, schemaWorkerSid, schemaWorkspace } from '../../schemas'
-import { validateVariables } from '../../utils'
+import { TwilioError } from '../../common/errors'
+import { schemaString, schemaWorkerSid, schemaWorkspace } from '../../common/schemas'
+import { validateVariables } from '../../common/utils'
 import { workspace } from '.'
 
 /**

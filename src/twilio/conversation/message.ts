@@ -1,10 +1,10 @@
 import { ConversationInstance } from 'twilio/lib/rest/conversations/v1/conversation'
 import { MessageListInstanceCreateOptions } from 'twilio/lib/rest/conversations/v1/conversation/message'
 
-import { validateVariables } from '../../utils'
-import { schemaMessageContentConversation, schemaMessageConversation } from '../../schemas'
-import { TwilioError } from '../../errors'
-import { Content } from '../../types'
+import { validateVariables } from '../../common/utils'
+import { schemaMessageContentConversation, schemaMessageConversation } from '../../common/schemas'
+import { TwilioError } from '../../common/errors'
+import { Content } from '../../interfaces'
 
 /**
  * Creates a message in a conversation with body.

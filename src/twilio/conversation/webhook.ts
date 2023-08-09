@@ -1,9 +1,9 @@
 import { ConversationInstance } from 'twilio/lib/rest/conversations/v1/conversation'
 
-import { validateVariables } from '../../utils'
-import { schemaFindWebhookTargetConversation, schemaWebhookConversation } from '../../schemas'
-import { TwilioError } from '../../errors'
-import { CreateWebhookOptions } from '../../types'
+import { validateVariables } from '../../common/utils'
+import { schemaFindWebhookTargetConversation, schemaWebhookConversation } from '../../common/schemas'
+import { TwilioError } from '../../common/errors'
+import { CreateWebhookOptions } from '../../interfaces'
 import { WebhookTarget } from 'twilio/lib/rest/conversations/v1/conversation/webhook'
 
 /**

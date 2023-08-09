@@ -1,7 +1,7 @@
 import { ContentInstance } from 'twilio/lib/rest/content/v1/content'
-import { TwilioError } from '../../errors'
-import { schemaContentSid, schemaString } from '../../schemas'
-import { accumulateWithPaginator, validateClientTwilio, validateVariables } from '../../utils'
+import { TwilioError } from '../../common/errors'
+import { schemaContentSid, schemaString } from '../../common/schemas'
+import { accumulateWithPaginator, validateClientTwilio, validateVariables } from '../../common/utils'
 import { client } from '../twilio'
 
 /**

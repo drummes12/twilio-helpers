@@ -1,10 +1,10 @@
 import twilio, { Twilio } from 'twilio'
 
-import { CreateClientOptions } from '../types'
+import { CreateClientOptions } from '../interfaces'
 
-import { ClientTwilioError } from '../errors'
-import { schemaAuth } from '../schemas'
-import { validateVariables } from '../utils'
+import { ClientTwilioError } from '../common/errors'
+import { schemaAuth } from '../common/schemas'
+import { validateVariables } from '../common/utils'
 
 let client: Twilio | null = null
 

@@ -1,9 +1,9 @@
 import { ConversationInstance } from 'twilio/lib/rest/conversations/v1/service/conversation'
 
-import { CreateParticipantOptions, ParticipantOptions } from '../../types'
-import { schemaAddress, schemaAddresses, schemaConversation } from '../../schemas'
-import { accumulateWithPaginator, validateClientTwilio, validateVariables } from '../../utils'
-import { TwilioError } from '../../errors'
+import { CreateParticipantOptions, ParticipantOptions } from '../../interfaces'
+import { schemaAddress, schemaAddresses, schemaConversation } from '../../common/schemas'
+import { accumulateWithPaginator, validateClientTwilio, validateVariables } from '../../common/utils'
+import { TwilioError } from '../../common/errors'
 import { client } from '../twilio'
 import { ParticipantConversationInstance } from 'twilio/lib/rest/conversations/v1/service/participantConversation'
 

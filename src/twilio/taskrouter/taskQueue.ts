@@ -1,8 +1,8 @@
 import { TaskQueueListInstanceCreateOptions } from 'twilio/lib/rest/taskrouter/v1/workspace/taskQueue'
 
-import { TwilioError } from '../../errors'
-import { schemaOptionsCreateTaskQueue, schemaWorkspace } from '../../schemas'
-import { validateVariables } from '../../utils'
+import { TwilioError } from '../../common/errors'
+import { schemaOptionsCreateTaskQueue, schemaWorkspace } from '../../common/schemas'
+import { validateVariables } from '../../common/utils'
 import { workspace } from '.'
 
 /**

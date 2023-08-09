@@ -1,8 +1,8 @@
 import { ServiceContext } from 'twilio/lib/rest/sync/v1/service'
 
 import { client } from '../twilio'
-import { validateClientTwilio, validateVariables } from '../../utils'
-import { schemaSyncServiceSid } from '../../schemas'
+import { validateClientTwilio, validateVariables } from '../../common/utils'
+import { schemaSyncServiceSid } from '../../common/schemas'
 
 let syncService: ServiceContext | null = null
 

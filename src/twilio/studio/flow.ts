@@ -1,7 +1,7 @@
 import { FlowInstance } from 'twilio/lib/rest/studio/v1/flow'
-import { TwilioError } from '../../errors'
-import { schemaStudioFlowSid } from '../../schemas'
-import { accumulateWithPaginator, validateClientTwilio, validateVariables } from '../../utils'
+import { TwilioError } from '../../common/errors'
+import { schemaStudioFlowSid } from '../../common/schemas'
+import { accumulateWithPaginator, validateClientTwilio, validateVariables } from '../../common/utils'
 import { client } from '../twilio'
 
 /**

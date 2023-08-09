@@ -1,4 +1,4 @@
-import { CompleteErrorDetails, SimpleErrorDetails } from './types'
+import { CompleteErrorDetails, SimpleErrorDetails } from '../interfaces'
 
 export class ClientTwilioError extends Error {
   public status: number

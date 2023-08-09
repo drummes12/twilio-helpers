@@ -1,9 +1,9 @@
 import { FlowInstance } from 'twilio/lib/rest/studio/v1/flow'
 
-import { TwilioError } from '../../errors'
-import { schemaExecutionStudioFlow, schemaStudioFlowSid } from '../../schemas'
-import { accumulateWithPaginator, validateVariables } from '../../utils'
-import { CreateExecutionStudioFlowOptions } from '../../types'
+import { TwilioError } from '../../common/errors'
+import { schemaExecutionStudioFlow, schemaStudioFlowSid } from '../../common/schemas'
+import { accumulateWithPaginator, validateVariables } from '../../common/utils'
+import { CreateExecutionStudioFlowOptions } from '../../interfaces'
 
 /**
  * This function retrieves all executions of a given Studio flow using pagination.

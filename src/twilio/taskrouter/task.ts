@@ -1,7 +1,7 @@
 import { workspace } from '.'
-import { TwilioError } from '../../errors'
-import { schemaString, schemaTaskSid, schemaWorkspace } from '../../schemas'
-import { validateVariables } from '../../utils'
+import { TwilioError } from '../../common/errors'
+import { schemaString, schemaTaskSid, schemaWorkspace } from '../../common/schemas'
+import { validateVariables } from '../../common/utils'
 
 /**
  * Fetches a specific task from a Twilio TaskRouter workspace.
