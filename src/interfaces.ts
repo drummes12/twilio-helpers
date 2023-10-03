@@ -12,6 +12,7 @@ export interface ContextServerlessTwilio {
 }
 
 export interface CreateClientOptions {
+  context?: ContextServerlessTwilio
   accountSid?: string
   authToken?: string
   options?: ClientOpts
@@ -65,7 +66,7 @@ export interface CompleteErrorDetails {
   details: string
 }
 
-export type Paginator = Page<Version, TwilioResponsePayload, any, any>
+export type Paginator = Page<Version, TwilioResponsePayload, any, any> | undefined
 
 export interface HeadersResponse {
   [key: string]: string

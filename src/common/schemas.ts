@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { WEBHOOK_POST_ACTION, SID, WEBHOOK_METHOD, WEBHOOK_TARGET, REGEX_SID, REGEX_ADDRESS } from './consts.js'
+import { WEBHOOK_POST_ACTION, SID, WEBHOOK_METHOD, WEBHOOK_TARGET, REGEX_SID, REGEX_ADDRESS } from './consts'
 
 export const schemaSid = (initialSid: string) => Joi.string().pattern(REGEX_SID(initialSid))
 

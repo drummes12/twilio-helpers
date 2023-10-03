@@ -5,19 +5,17 @@ import { CompleteErrorDetails, HeadersResponse, Paginator, SimpleErrorDetails } 
 
 import { ClientTwilioError, ValidationError } from './errors'
 import { schemaResponse } from './schemas'
-import { client } from '../twilio/twilio'
+import TwilioClient from '../twilio/twilio'
+import { ERROR_MESSAGES } from './messages'
 
 /**
  * Validates the Twilio client and ensures that it is initialized.
  * Throws a ClientTwilioError if the client is not found or not initialized.
  */
 export function validateClientTwilio () {
-  if (client == null) {
-    throw new ClientTwilioError('❌ ~ Twilio client not found', {
-      details: `The Twilio client is not initialized. Please provide the accountSid and authToken to initialize the client as follows:
-createClient({ accountSid: "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", authToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" })
-or
-createClient({ context })`
+  if (TwilioClient.getClient() == null) {
+    throw new ClientTwilioError(ERROR_MESSAGES.TWILIO_CLIENT_NOT_FOUND.MESSAGE, {
+      details: ERROR_MESSAGES.TWILIO_CLIENT_NOT_FOUND.DETAILS
     })
   }
 }
@@ -62,6 +60,8 @@ export function validateVariables (schema: Schema, data: unknown, functionName =
  *  .then((page) => accumulateWithPaginator(page))
  */
 export function accumulateWithPaginator (paginator: Paginator, accumulator: object[] = []): any {
+  if (paginator == null) return []
+
   const items = paginator?.instances
 
   if (items === null) return []
