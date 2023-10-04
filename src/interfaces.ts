@@ -1,6 +1,7 @@
 import { Twilio, ClientOpts } from 'twilio'
 import Page, { TwilioResponsePayload } from 'twilio/lib/base/Page'
 import Version from 'twilio/lib/base/Version'
+import { MessageListInstanceCreateOptions } from 'twilio/lib/rest/conversations/v1/conversation/message'
 import { WebhookMethod, WebhookTarget } from 'twilio/lib/rest/conversations/v1/conversation/webhook'
 
 export interface ContextServerlessTwilio {
@@ -20,7 +21,11 @@ export interface CreateClientOptions {
 
 export interface Content {
   sid: string
-  variables: { [key: number]: string }
+  variables?: { [key: number]: string }
+}
+
+export interface CreateContentConversationOptions extends MessageListInstanceCreateOptions {
+  content: Content
 }
 
 export interface ParticipantOptions {

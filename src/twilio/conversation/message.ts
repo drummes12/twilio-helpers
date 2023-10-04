@@ -4,7 +4,7 @@ import { MessageListInstanceCreateOptions } from 'twilio/lib/rest/conversations/
 import { validateVariables } from '../../common/utils'
 import { schemaMessageContentConversation, schemaMessageConversation } from '../../common/schemas'
 import { TwilioError } from '../../common/errors'
-import { Content } from '../../interfaces'
+import { CreateContentConversationOptions } from '../../interfaces'
 
 /**
  * Creates a message in a conversation with body.
@@ -18,19 +18,14 @@ import { Content } from '../../interfaces'
  */
 export async function createMessageInConversation (
   conversation: ConversationInstance,
-  { author, body }: MessageListInstanceCreateOptions
+  options: MessageListInstanceCreateOptions
 ) {
-  validateVariables(
-    schemaMessageConversation,
-    { conversation, options: { author, body } },
-    'createMessageInConversation'
-  )
-  return await conversation
-    .messages()
-    .create({ author, body })
+  validateVariables(schemaMessageConversation.required(), { conversation, options }, 'createMessage')
+  return await conversation.messages()
+    .create(options)
     .catch((error) => {
       const message: string = error.message
-      throw new TwilioError(`❌ ~ createMessageInConversation ~ ${message}`, { ...error })
+      throw new TwilioError(`❌ ~ createMessage ~ ${message}`, { ...error })
     })
 }
 
@@ -49,22 +44,17 @@ export async function createMessageInConversation (
  */
 export async function createMessageContentInConversation (
   conversation: ConversationInstance,
-  { author, content }: { author: string, content: Content }
+  { content, ...options }: CreateContentConversationOptions
 ) {
-  validateVariables(
-    schemaMessageContentConversation,
-    { conversation, options: { author, content } },
-    'createMessageContentInConversation'
-  )
-  return await conversation
-    .messages()
+  validateVariables(schemaMessageContentConversation.required(), { conversation, options: { ...options, content } }, 'createMessageContent')
+  return await conversation?.messages()
     .create({
-      author,
+      ...options,
       contentSid: content.sid,
-      contentVariables: JSON.stringify(content.variables)
+      contentVariables: ((content?.variables) != null) ? JSON.stringify(content.variables) : undefined
     })
     .catch((error) => {
       const message: string = error.message
-      throw new TwilioError(`❌ ~ createMessageContentInConversation ~ ${message}`, { ...error })
+      throw new TwilioError(`❌ ~ createMessageContent ~ ${message}`, { ...error })
     })
 }

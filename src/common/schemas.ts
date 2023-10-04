@@ -98,21 +98,34 @@ export const schemaFindWebhookTargetConversation = Joi.object({
 export const schemaMessageConversation = Joi.object({
   conversation: schemaConversation.required(),
   options: Joi.object({
-    author: Joi.string().required().strict(),
-    body: Joi.string().required().strict()
+    xTwilioWebhookEnabled: Joi.string().valid('true', 'false'),
+    author: Joi.string(),
+    body: Joi.string().required().strict(),
+    dateCreated: Date,
+    dateUpdated: Date,
+    attributes: Joi.string(),
+    mediaSid: Joi.string(),
+    contentSid: Joi.string(),
+    contentVariables: Joi.string()
   }).required()
-}).required()
+})
 
 export const schemaMessageContentConversation = Joi.object({
   conversation: schemaConversation.required(),
   options: Joi.object({
-    author: Joi.string().required().strict(),
+    author: Joi.string(),
+    xTwilioWebhookEnabled: Joi.string().valid('true', 'false'),
+    body: Joi.string(),
+    dateCreated: Date,
+    dateUpdated: Date,
+    attributes: Joi.string(),
+    mediaSid: Joi.string(),
     content: Joi.object({
       sid: schemaContentSid.required(),
-      variables: Joi.object().pattern(Joi.number(), Joi.string().strict()).min(1)
+      variables: Joi.object().pattern(Joi.number(), Joi.string().strict())
     }).required()
   }).required()
-}).required()
+})
 
 export const schemaAddresses = Joi.object({
   address: schemaAddress.required(),
@@ -150,3 +163,23 @@ export const schemaOptionsCreateTaskQueue = Joi.object({
   reservationActivitySid: Joi.string(),
   assignmentActivitySid: Joi.string()
 }).required()
+
+export const schemaOptionsUpdateConversation = Joi.object({
+  xTwilioWebhookEnabled: Joi.string().valid('true', 'false'),
+  friendlyName: Joi.string(),
+  dateCreated: Joi.date(),
+  dateUpdated: Joi.date(),
+  attributes: Joi.string(),
+  messagingServiceSid: Joi.string(),
+  state: Joi.string().valid('inactive', 'active', 'closed'),
+  'timers.inactive': Joi.string(),
+  'timers.closed': Joi.string(),
+  uniqueName: Joi.string()
+})
+
+export const schemaParticipantConversationListOptions = Joi.object({
+  identity: Joi.string(),
+  address: Joi.string(),
+  pageSize: Joi.number().integer().min(1).max(1000),
+  limit: Joi.number().integer().min(1).max(1000)
+})
